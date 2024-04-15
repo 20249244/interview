@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class InventoryDomainService {
 
 
+
     /**
      * 获取sku当前库存
      *
@@ -17,6 +18,10 @@ public class InventoryDomainService {
      */
     public Integer getInventory(String skuId) {
         //todo 需要你在infra实现，只需要实现缓存操作, 返回的领域对象自行定义
+
+
+        // 从缓存中获取当前SKU的库存数量
+
         return null;
     }
 

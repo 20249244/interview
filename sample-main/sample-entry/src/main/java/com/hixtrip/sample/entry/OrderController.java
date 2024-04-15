@@ -2,6 +2,9 @@ package com.hixtrip.sample.entry;
 
 import com.hixtrip.sample.client.order.dto.CommandOderCreateDTO;
 import com.hixtrip.sample.client.order.dto.CommandPayDTO;
+import com.hixtrip.sample.domain.order.OrderDomainService;
+import com.hixtrip.sample.domain.order.model.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
+    @Autowired
+    OrderDomainService orderDomainService;
 
     /**
      * todo 这是你要实现的接口
@@ -20,9 +25,14 @@ public class OrderController {
      * @return 请修改出参对象
      */
     @PostMapping(path = "/command/order/create")
-    public String order(@RequestBody CommandOderCreateDTO commandOderCreateDTO) {
+    public String order(@RequestBody CommandOderCreateDTO commandOderCreateDTO) throws Exception {
         //登录信息可以在这里模拟
         var userId = "";
+        Order order =new Order();
+        order.setSkuId(commandOderCreateDTO.getSkuId());
+        order.setAmount(commandOderCreateDTO.getAmount());
+        order.setUserId(commandOderCreateDTO.getUserId());
+        orderDomainService.createOrder(order);
         return "";
     }
 
